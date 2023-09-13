@@ -31,14 +31,14 @@ class ClockPage extends StatefulWidget {
 }
 
 class _ClockPageState extends State<ClockPage> {
-  int _time = 0;
+  String _time = 0 as String;
 
   void _updateTime() {
     setState(() {
       // Obter a hora atual
       final now = DateTime.now();
       // Formatar a hora no formato HH:mm:ss
-      _time = DateFormat.Hms().format(now) as int;
+      _time = DateFormat.Hms().format(now);
     });
   }
 
@@ -90,7 +90,7 @@ class _ClockPageState extends State<ClockPage> {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             Text(
-              _time as String,
+              _time,
               style: const TextStyle(fontSize: 48.0),
             ),
           ],
