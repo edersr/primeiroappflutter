@@ -31,7 +31,7 @@ class ClockPage extends StatefulWidget {
 }
 
 class _ClockPageState extends State<ClockPage> {
-  String _time = 0 as String;
+  String _time = '';
 
   void _updateTime() {
     setState(() {
