@@ -1,3 +1,4 @@
+import 'dart:async'; // Importe a biblioteca para Timer
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -32,6 +33,23 @@ class ClockPage extends StatefulWidget {
 
 class _ClockPageState extends State<ClockPage> {
   String _time = '';
+  late Timer _timer; // Variável para armazenar o temporizador
+
+  @override
+  void initState() {
+    super.initState();
+    _updateTime(); // Chama a função uma vez ao iniciar
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      // Configura o temporizador para chamar a função a cada segundo
+      _updateTime();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel(); // Cancela o temporizador ao descartar a página
+    super.dispose();
+  }
 
   void _updateTime() {
     setState(() {
@@ -42,7 +60,6 @@ class _ClockPageState extends State<ClockPage> {
     });
   }
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,12 +89,6 @@ class _ClockPageState extends State<ClockPage> {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed:
-            _updateTime, // Atualizar a hora quando o botão for pressionado
-        tooltip: 'Atualizar',
-        child: const Icon(Icons.refresh),
       ),
     );
   }
